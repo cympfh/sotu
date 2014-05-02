@@ -4,3 +4,8 @@
 
 1. [[detect-icon]]
 2. [[unit]]
+3. ML-Ask
+4. icon-lexicon
+5. conj-lexicon
+6. SVM
+
