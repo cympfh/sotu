@@ -1,0 +1,126 @@
+# 今あるファイルについて
+
+現時点 (2014/05/06) で入ってる tweet0.*.txt について説明する
+実際の卒論でも使ったはずのデータで
+一つのツイートに顔文字が2つ以上含まれるという条件で持ってフィルタしたもの
+
+当時に私がアノテートした結果が `tweet0.old.hand.txt`で
+最近にやはり私がアノテートした結果が `tweet0.new.hand.txt`。
+大体一致してた(kappa=0.556)
+
+
+# ファイル形式
+
+1 tweet を次のように
+
+{{{ tweet.txt
+<text>
+❤定期＆拡散希望❤こえ部にて【初音ミク】パラメタ【40mP】聞い
+</text>
+<conj>
+て
+</conj>
+<text>
+くれる
+</text>
+<conj>
+と
+</conj>
+<text>
+嬉しいです
+</text>
+<icon>
+(ﾉｼ・ω・)ﾉｼ
+</icon>
+<text>
+スマイルとかし
+</text>
+<conj>
+て
+</conj>
+<text>
+くれる
+</text>
+<conj>
+と
+</conj>
+<text>
+嬉しすぎ
+</text>
+<conj>
+て
+</conj>
+<text>
+はげます
+</text>
+<icon>
+(ﾉｼ・ω・)ﾉｼ
+</icon>
+__EOT__
+}}}
+
+これに対して
+アノテートの結果とは
+
+{{{ tweet.hand.txt
+<text>
+yor
+</text>
+<conj>
+yor
+</conj>
+<text>
+yor
+</text>
+<conj>
+yor
+</conj>
+<text>
+yor
+</text>
+<icon>
+yor
+</icon>
+<text>
+yor
+</text>
+<conj>
+yor
+</conj>
+<text>
+yor
+</text>
+<conj>
+yor
+</conj>
+<text>
+yor
+</text>
+<conj>
+yor
+</conj>
+<text>
+yor
+</text>
+<icon>
+yor
+</icon>
+__EOT__
+}}}
+
+# 拡張子
+
+- .txt 最初のツイート (ユニット分割したもの)
+- .hand.txt 手でアノテート
+- .output.txt 機械がアノテートしたもの
+
+# アノテートのタグ
+
+- null
+- yor
+- ai
+- odo
+- ika
+- haj
+
+勝手にエイリアスを追加したりしないこと

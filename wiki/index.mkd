@@ -10,3 +10,6 @@
     - [[conj-lexicon]]
 6. SVM
 
+他ファイル
+
+* [[tweets]]
