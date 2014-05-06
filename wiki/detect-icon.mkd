@@ -1,10 +1,24 @@
+# Usage [タギングのみ]
 
-detect-icon/Makefile
-を実行すると
+訓練結果 icon.model がある場合
+
+{{{
+detect-icon/detect input.txt output.txt
+}}}
+
+で`input.txt`から`output.txt`を生成する
+
+ここで、`input.txt`は下のテストデータのことである
+
+# Usage [訓練からテストまで]
+
+make -f detect-icon/Makefile
 
 訓練データ `detect-icon/input.train.txt` の下で
-入力データ `detect-icon/input.test.txt` から
+テストデータ `detect-icon/input.test.txt` から
 `detect-icon/output.txt` を出力する
+
+---
 
 # 訓練データ
 
@@ -15,7 +29,7 @@ detect-icon/Makefile
 
 都合上、<> という文字列と、タブ文字は素のテキストにあると困ることになる
 
-# 入力データ
+# テストデータ
 
 入力データは 訓練データから <> を取り除いたもの
 すなわち素のツイートを行単位で並べたもの

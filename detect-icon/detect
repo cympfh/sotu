@@ -1,0 +1,8 @@
+#!/bin/sh
+
+INPUT=$1
+OUTPUT=$2
+
+./tagging.exe < $INPUT > /tmp/crf
+crfsuite tag -m icon.model /tmp/crf > /tmp/tag
+./tag2line.exe $INPUT /tmp/tag > $OUTPUT
