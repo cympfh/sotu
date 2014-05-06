@@ -6,20 +6,63 @@ main = do
   args <- getArgs
   text <- readFile $ args !! 0
   tags <- lines <$> (readFile $ args !! 1)
-  printT text tags
+  let tags' = filter (`elem` ["B","I","O"]) tags
+  printT text tags'
 
-  where
-  printT ('\n' : cs) xs = putStrLn "\n__EOT__" >> printT cs xs
+printT :: String -> [String] -> IO ()
 
-  printT (c : cs) ("O" : "B" : xs) = putChar c >> putStr startTag  >> printT cs ("I" : xs)
-  printT (c : cs) ("B" : xs@("B" : _)) = putStr startTag >> putChar c >> printT cs xs
-  printT (c : cs) ("B" : xs@("I" : _)) = putStr startTag >> putChar c >> printT cs xs
+-- 顔文字がIで始まってることになっちゃう時がある
+printT ('\n' : cs) ("I":xs) = do
+  putStrLn endTag
+  putStrLn eot
+  printT cs ("B":xs)
 
-  printT (c : cs) ("B" : "O" : xs) = putChar c >> putStr endTag >> printT cs ("O" : xs)
-  printT (c : cs) ("I" : "O" : xs) = putChar c >> putStr endTag >> printT cs ("O" : xs)
-  printT (c : cs) (_ : xs) = putChar c >> printT cs xs
-  printT _ [] = return ()
-  printT [] _ = return ()
+printT ('\n' : cs) xs = putStrLn eot >> printT cs xs
 
-  startTag = "\n<icon>\n"
-  endTag = "\n</icon>\n"
+printT (c : cs) ("O" : "B" : xs) = do
+  putChar c
+  putStr startTag
+  printT cs ("I" : xs)
+
+printT (c : cs) ("B" : "B" : xs) = do
+  putStr startTag
+  putChar c
+  putStr endTag
+  printT cs ("B":xs)
+
+printT (c : cs) ("B" : "I" : xs) = do
+  putStr startTag
+  putChar c
+  printT cs ("I":xs)
+
+printT (c : cs) ("B" : "O" : xs) = do
+  putChar c
+  putStr endTag
+  printT cs ("O" : xs)
+
+printT (c : cs) ("I" : "O" : xs) = do
+  putChar c
+  putStr endTag
+  printT cs ("O" : xs)
+
+-- end of file
+printT (c:_) ["B"] = do
+  putChar c
+  putStrLn endTag
+  putStrLn eot
+
+printT (c:_) ["I"] = do
+  putChar c
+  putStrLn endTag
+  putStrLn eot
+
+printT (c:_) ["O"] = putChar c >> putStrLn eot
+
+printT (c : cs) (x : xs) = putChar c >> printT cs xs
+
+printT cs [] = return ()
+printT [] xs = return ()
+
+startTag = "\n<icon>\n"
+endTag = "\n</icon>\n"
+eot = "\n__EOT__"
