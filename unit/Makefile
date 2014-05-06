@@ -1,4 +1,5 @@
-all: test
+just: unit.exe
+	cat /tmp/icon | head -n54 | tail -n10 | ./unit.exe
 	
 test: unit.exe
 	./unit.exe < ../detect-icon/output.txt > ./output.txt

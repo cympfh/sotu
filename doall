@@ -6,3 +6,5 @@ cd detect-icon/
 ./detect $INPUT /tmp/icon
 cd ..
 ./unit/unit.exe < /tmp/icon > /tmp/unit
+
+sed '/^$/d' /tmp/unit > /tmp/output # detect-icon/tag2line で </icon>__EOT__ の時に間に改行挟みまくっちゃう
