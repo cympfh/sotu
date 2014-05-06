@@ -3,12 +3,15 @@
 訓練結果 icon.model がある場合
 
 {{{
-detect-icon/detect input.txt output.txt
+cd ./detect-icon
+./detect input.txt output.txt
 }}}
 
 で`input.txt`から`output.txt`を生成する
 
 ここで、`input.txt`は下のテストデータのことである
+
+NB. そこのディレクトリに移動してからじゃないと動かない
 
 # Usage [訓練からテストまで]
 
