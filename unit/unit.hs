@@ -2,10 +2,11 @@ import Control.Monad
 import Control.Applicative
 import System.Process
 import Text.Regex.Posix
+import Punc
 
 main = do
   ls <- lines <$> getContents
-  loop ls
+  loop $ splitByPunctuation ls
 
   where
 
@@ -29,7 +30,7 @@ main = do
 mecab :: String -> IO ()
 mecab str = do
   ls <- lines <$> readProcess "mecab" [] str
-  let ls' = punc $ merge $ map (\(s, b) -> (s, b =~ "接続詞" :: Bool)) $ map (split '\t') $ init ls
+  let ls' = merge $ map (\(s, b) -> (s, b =~ "接続詞" :: Bool)) $ map (split '\t') $ init ls
   forM_ ls' printTag
   
   where
@@ -50,8 +51,5 @@ merge [x] = [x]
 merge ((s1, False) : (s2, False) : rest) = merge $ (s1 ++ s2, False) : rest
 merge (x : xs) = x : merge xs
 
-punc [] = []
-punc ((s, False) : rest) = punc' s ++ punc rest
-punc (x:xs) = x : punc xs
-
-
+splitByPunctuation :: [String] -> [String]
+splitByPunctuation = concat . map punc
