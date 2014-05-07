@@ -25,7 +25,8 @@ main = do
 
 collect [] _ ac = ac
 collect (x:xs) (y:ys) ac
-  | x == "<icon>" = collect (drop 2 xs) (drop 2 ys) $ update (head xs) (head ys) ac
+  | x == "<icon>" = collect (drop 2 xs) (drop 2 ys) $
+                    update (head xs) (head ys) ac
   | otherwise     = collect xs ys ac
     where
       update i em (a,b,c,d,e,f) =
