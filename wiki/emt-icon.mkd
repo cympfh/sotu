@@ -5,16 +5,16 @@
 - null
 - yor
 - ai
-- ika
 - odo
+- ika
 - haj
+
+(感情タグを並べる順番はこれに統一)
 
 # 訓練 (辞書の作成)
 
-- `train`
-
 {{{
-$ ./train tweet.txt tweet.hand.txt > icon.lex
+$ ./train.exe tweet.txt tweet.hand.txt > icon.lex
 }}}
 
 tweet.txt 及び tweet.hand.txt は [[tweets]] の
@@ -41,7 +41,7 @@ tweet.txt 及び tweet.hand.txt は [[tweets]] の
 # 推定 (辞書の使用)
 
 {{{
-    ./emt-icon < EOM
+    ./emt-icon.exe < EOM
     (´・ω・｀)
     +。:.ﾟ٩(๑>◡<๑)۶:.｡+ﾟ1
     EOM
