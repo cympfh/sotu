@@ -1,0 +1,2 @@
+#!/bin/bash
+node decode.js ../tweets/tweet0.txt <<< "YwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwUYwwwuYwwwwwwwwuU"

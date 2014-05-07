@@ -1,12 +1,43 @@
 卒論用のプログラムを完全に再現する範囲でHaskellで書きなおすプロジェクトです
 
-# 実行ファイル
+# Makefile
+
+## 素ツイートデータからunitsデータにする
 
 {{{
-./doall tweet.txt
+  $ TWEETS=./tweets.txt
+  $ make units
+  $ less /tmp/unit
 }}}
 
-これで全部終わるようにする
+unitsデータから、素性抽出、あるいは手で正解でータを作る
+
+## 素性抽出
+
+{{{
+  $ UNITS=/tmp/unit
+  $ make features
+  $ less /tmp/features
+}}}
+
+## 訓練
+
+{{{
+  $ UNITS=/tmp/unit
+  $ HAND=./hand.txt
+  $ make train
+}}}
+
+未実装
+
+## 推定
+
+{{{
+  $ UNITS=/tmp/unit
+  $ make emt
+}}}
+
+未実装
 
 # 手順ステップ
 
@@ -16,6 +47,7 @@
     - [[ML-Ask]]
     - [[emt-icon]]
     - [[conj-lexicon]]
+4. [[hand]]
 6. SVM
 
 # 他ファイル

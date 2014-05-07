@@ -1,0 +1,28 @@
+形式は [[tweets]] を参照のこと。
+unitsの<text>, <icon> について テキストを感情タグで置き換える。
+
+{{{
+  <text>
+  ほげ
+  </text>
+  <icon>
+  (´･ェ･｀)
+  </icon>
+  <conj>
+  しかし
+  </conj>
+}}}
+
+{{{
+  <text>
+  yor
+  </text>
+  <icon>
+  ai
+  </icon>
+  <conj>
+  しかし
+  </conj>
+}}}
+
+

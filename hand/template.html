@@ -1,0 +1,142 @@
+<html>
+  <title>annotator</title>
+  <style>
+    div.tw {
+      margin-bottom: 10px;
+      background-color: #eee;
+    }
+    span {
+      border: 2px #eee dashed;
+      margin: 2px;
+    }
+    .U { background-color: #eee; }
+    .N { background-color: #fff; }
+    .Y { background-color: #faa; }
+    .A { background-color: #afa; }
+    .O { background-color: #aaa; }
+    .I { background-color: #f00; }
+    .H { background-color: #ff0; }
+
+  </style>
+  <script>
+    var table = [];
+    var show = {
+      'U' : '未',
+      'N' : '無',
+      'Y' : '喜',
+      'A' : '哀',
+      'O' : '驚',
+      'I' : '怒',
+      'H' : '恥'
+    };
+
+    function init() {
+      var spans = document.getElementsByTagName('span');
+      for (var i=0; i < spans.length; ++i) {
+        var obj = spans[i];
+        obj.onmouseover = eventOf(i);
+        obj.onclick = eventOf_C(i);
+        obj.status_id = i;
+        table[i] = 'U';
+      }
+
+      tws =
+        Array.apply(null, document.getElementsByTagName('div'))
+          .filter(function(x){ return x.className === 'tw' });
+        tws.forEach(function(tw, i) {
+          tw.appendChild(allN(i));
+          tw.appendChild(allY(i));
+        });
+
+      function allN(idx) {
+        var ret = document.createElement('code');
+        ret.innerHTML = '[全て無]';
+        ret.onclick = function (e) {
+          var ls = Array.apply(null, e.target.parentNode.getElementsByTagName('span'));
+          ls.forEach(function(x) {
+            table[x.status_id] = 'N';
+            x.className = 'N';
+          })
+          
+        };
+
+        return ret;
+      }
+      function allY(idx) {
+        var ret = document.createElement('code');
+        ret.innerHTML = '[全て喜]';
+        ret.onclick = function (e) {
+          var ls = Array.apply(null, e.target.parentNode.getElementsByTagName('span'));
+          ls.forEach(function(x) {
+            table[x.status_id] = 'Y';
+            x.className = 'Y';
+          });
+        };
+        return ret;
+      }
+    }
+    function eventOf(idx) {
+      return function(e) {
+        D.innerHTML =  '"' + e.target.innerHTML + '"';
+        D.innerHTML += '<br>';
+        D.innerHTML += '感情タグ: ' + show[table[idx]];
+        return false;
+      }
+    }
+    function eventOf_C(idx) {
+      return function (e) {
+        update(idx);
+        display();
+        D.innerHTML =  '"' + e.target.innerHTML + '"';
+        D.innerHTML += '<br>';
+        D.innerHTML += '感情タグ: ' + show[table[idx]];
+        e.target.className = table[idx];
+        return false;
+      }
+    }
+    function update(idx) {
+      var x = table[idx];
+      if (x === 'U') x = 'N';
+      else if (x === 'N') x = 'Y';
+      else if (x === 'Y') x = 'A';
+      else if (x === 'A') x = 'O';
+      else if (x === 'O') x = 'I';
+      else if (x === 'I') x = 'H';
+      else if (x === 'H') x = 'U';
+      table[idx] = x;
+    }
+    function display() {
+      var x = table.join('');
+      x = x.replace(/UUUUUUUU/g, "w");
+      x = x.replace(/UUUU/g, "v");
+      x = x.replace(/UU/g, "u");
+      x = x.replace(/NNNN/g, "m");
+      x = x.replace(/NN/g, "n");
+      x = x.replace(/YYYY/g, "t");
+      x = x.replace(/YY/g, "y");
+      x = x.replace(/AA/g, "a");
+      x = x.replace(/OO/g, "o");
+      x = x.replace(/II/g, "i");
+      x = x.replace(/HH/g, "h");
+      CODE.value = x;
+    }
+
+  </script>
+<body onload='init()'>
+  <div style='float:left;width:18%;position:fixed'>
+    mouse over TEXT, and annotate by click<hr>
+    <div id=D></div><hr>
+    result: <input id='CODE' onfocus='this.select()' readonly="readonly"><br>(copy this)<hr>
+    感情タグ
+    <ul>
+      <li class='U'> 未(U): まだアノテートしていない
+      <li class='N'> 無(N): 感情無し(あるいはノーマル)
+      <li class='Y'> 喜(Y)
+      <li class='A'> 哀(A)
+      <li class='O'> 驚(O)
+      <li class='I'> 怒(I)
+      <li class='H'> 恥(H)
+    </ul>
+  </div>
+  <div style='float:right;width:80%'>
+  <div class='tw'>

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+UNITS=../tweets/tweet0.txt
+EXPORT=/tmp/a.html
+
+cat template.html > $EXPORT
+cat ${UNITS} | \
+  sed -e 's/__EOT__/<\/div><div class=tw>/' \
+      -e 's/<text>/<span>/' \
+      -e 's/<\/text>/<\/span>/' \
+      -e 's/<icon>/<span>/' \
+      -e 's/<\/icon>/<\/span>/' \
+  >> ${EXPORT}
