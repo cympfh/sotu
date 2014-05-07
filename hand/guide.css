@@ -1,0 +1,15 @@
+h1 {
+    text-decoration: underline;
+}
+img {
+    border: 3px black solid;
+}
+pre {
+    border-left: 3px black solid;
+    margin-left: 10px;
+    padding-left: 10px;
+    background-color: #f7f7f7;
+}
+code {
+    background-color: #f2f7f7;
+}
