@@ -21,6 +21,14 @@
 }}}
 
 `units.txt` は [[unit]] によって分割されたやつ。
+{{{ units.txt
+  <text>
+  なんとかかんとか
+  </text>
+  <icon>
+  (´･ェ･｀)
+  </icon>
+}}}
 
 `features`は、内部で
 

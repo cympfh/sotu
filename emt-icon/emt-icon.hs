@@ -8,7 +8,7 @@ import Sim
 main = do
   args <- getArgs
   lex   <- readLex (args !! 0)
-  input <- lines <$> readFile (args !! 1)
+  input <- lines <$> getContents
   forM_ input $ \icon -> putStrLn $ unwords $ ems lex icon
 
 readLex fname = do

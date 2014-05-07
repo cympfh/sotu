@@ -40,8 +40,10 @@ tweet.txt 及び tweet.hand.txt は [[tweets]] の
 
 # 推定 (辞書の使用)
 
+辞書 `icon.lex` がある下で
+
 {{{
-    ./emt-icon.exe << EOM
+    ./emt-icon.exe icon.lex << EOM
     (´・ω・｀)
     +。:.ﾟ٩(๑>◡<๑)۶:.｡+ﾟ1
     EOM
