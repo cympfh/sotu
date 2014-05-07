@@ -88,7 +88,7 @@ function nub(ls) {
     .forEach(function(l) {
       var ls = test(l);
       if (ls.length === 0) {
-        console.log('undefined');
+        console.log('null');
       } else {
         console.log(ls.join(' '));
       }
