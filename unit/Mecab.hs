@@ -4,6 +4,9 @@ import Control.Monad
 import Control.Applicative
 import System.Process
 import Text.Regex.Posix
+import Debug.Trace
+
+debug x = trace (show x) x
 
 mecab :: String -> IO ()
 mecab str = do
@@ -13,7 +16,7 @@ mecab str = do
   
   where
     conj :: String -> Bool
-    conj b = b =~ "接続詞" || b =~ "接続助詞"
+    conj b = trace (show b) $ b =~ "接続"
     printTag (s, b) =
       if b then putStrLn "<conj>" >> putStrLn s >> putStrLn "</conj>"
            else putStrLn "<text>" >> putStrLn s >> putStrLn "</text>"
@@ -29,5 +32,7 @@ merge :: [(String, Bool)] -> [(String, Bool)]
 merge [] = []
 merge [x] = [x]
 merge ((s1, False) : (s2, False) : rest) = merge $ (s1 ++ s2, False) : rest
+merge ((s1, False) : (s2, True) : rest) =
+  (s1, False) : (s2, True) : (merge ((s1 ++ s2, False) : rest))
 merge (x : xs) = x : merge xs
 

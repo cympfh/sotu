@@ -1,6 +1,6 @@
 all: unit.exe
 
-%.exe: %.hs
+unit.exe: unit.hs Punc.hs Mecab.hs
 	ghc -O3 $^ -o $@
 
 clean:

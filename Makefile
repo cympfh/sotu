@@ -4,7 +4,6 @@ all:
 # 素tweet -> units
 units:
 	# split into units
-	cat $(TWEETS)
 	cd detect-icon/; ./detect $(TWEETS) /tmp/icon
 	./unit/unit.exe < /tmp/icon > /tmp/unit
 	# detect-icon/tag2line で
