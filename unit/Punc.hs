@@ -7,7 +7,7 @@ punc xs = loop xs []
 
   where
 
-  ls = "。、.,｡!?！？☆♪♡」"
+  ls = "｡。.．，、,…!?！？☆♪♡」"
   p  = flip elem ls
   q  = not . p
 
