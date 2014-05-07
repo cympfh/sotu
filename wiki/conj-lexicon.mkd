@@ -1,4 +1,4 @@
-完全一致方式の辞書に基づく分類器 (module Conj.hs)
+完全一致方式の辞書に基づく分類器
 
 クラスは以下の7つ
 
@@ -6,7 +6,16 @@ Conj = Add | Cont | Cause | Appose | Converse | Exemp | Other
 
 (累加、逆接、因果、並置、転換、例示、その他)
 
-{{{
-conj "しかし" == Cont
+{{{ usage
+  ./conj << EOM
+  しかし
+  なんとか
+  EOM
 }}}
 
+{{{ stdout
+  Cont
+  Other
+}}}
+
+としよう

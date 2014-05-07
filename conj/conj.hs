@@ -1,6 +1,6 @@
-module Conj (Conj, klass) where
-
 data Conj = Add | Cont | Cause | Appose | Converse | Exemp | Other deriving Show
+
+main = getContents >>= sequence_ . map (print . klass) . lines
 
 klass w
   | w `elem` adds = Add

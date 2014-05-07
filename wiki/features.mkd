@@ -1,0 +1,29 @@
+{{{ features.txt
+  <text>
+  yor ika
+  </text>
+  <icon>
+  yor
+  </icon>
+  <conj>
+  Add
+  </conj>
+  <text>
+  undefined
+  </text>
+  __EOT__
+}}}
+
+てな形式で出力させれば勝ち。
+
+{{{
+  ./feature tweets.txt > features.txt
+}}}
+
+`feature`は、内部で
+
+- [[ML-Ask]]
+- [[emt-icon]]
+- [[conj-lexicon]]
+
+
