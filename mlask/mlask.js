@@ -15,7 +15,7 @@ var emotions =
   .map(function(fname, i) {
     return {
         tag : emoTypes[i]
-      , ls  : readFile('./emotions/'+fname+'_uncoded.txt')
+      , ls  : readFile(process.env.PWD + '/emotions/'+fname+'_uncoded.txt')
                 .split('\n').slice(0, -1)
     };
   });
