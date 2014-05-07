@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="ガイドライン">ガイドライン</h1>
+<ul class="incremental">
+<li>ファイル概要</li>
+<li>感情タグ</li>
+<li>付与する感情タグの選び方</li>
+<li>付与の操作</li>
+</ul>
+<h1 id="ファイル概要">ファイル概要</h1>
+<p>ファイルには複数のツイートが、 顔文字、接続詞と接続助詞、その他のテキスト、の単位で分割された状態で 記述されている。<br />この内の「その他のテキスト」および「顔文字」に対して、 あなたが適切だと思う感情タグの付与をあなたにお願いします。</p>
+<h1 id="感情タグ">感情タグ</h1>
+<p>感情タグは次の6つ</p>
+<ul class="incremental">
+<li>null</li>
+<li>yor</li>
+<li>ai</li>
+<li>odo</li>
+<li>ika</li>
+<li>haj</li>
+</ul>
+<p>感情タグには次のように意味を与えることにする。</p>
+<h3 id="null">null</h3>
+<p>感情なし、ノーマルの状態</p>
+<h3 id="yor">yor</h3>
+<p>喜んでる状態。笑っている状態</p>
+<h3 id="ai">ai</h3>
+<p>悲哀の状態</p>
+<h3 id="odo">odo</h3>
+<p>驚きの状態</p>
+<h3 id="ika">ika</h3>
+<p>怒っている状態</p>
+<h3 id="haj">haj</h3>
+<p>恥じらっている、照れている状態</p>
+<h1 id="付与する感情タグの選び方">付与する感情タグの選び方</h1>
+<p>一つのテキストの全体を見た後、 「その他のテキスト」と「顔文字」のそれぞれに対して、 次のように感情タグを <b>ちょうど1つ</b> を判断して付与する。</p>
+<h2 id="その他のテキスト">その他のテキスト</h2>
+<p>「そのテキストを実際に書き手が読み上げる際に、 そのテキストのその箇所は先に挙げたどの感情を込めて 読むか」</p>
+<h2 id="顔文字">顔文字</h2>
+<p>「その顔文字はその文脈でどの感情として働いているか」</p>
+<p>例えば、明らかに泣いている表情を表す顔文字でも、 テキスト全体から、その顔文字は喜びとして働いていると判断した場合、<code>yor</code>を付与する。</p>
+<h3 id="例">例</h3>
+<blockquote>
+<p>最後まで付き合ってくれてありがとう(;_;)</p>
+</blockquote>
+<p><code>(;_;)</code>は一般に泣いている表情を表すが、 直前の「ありがとう」から嬉しくて泣いていると判断するならば、 <code>yor</code>が適切であると判断してもよい。</p>
+<h1 id="付与の操作">付与の操作</h1>
+<p>HTMLで書かれた簡単なインターフェイスを用意したが、 動かないか操作がわかりづらいなどあれば、 直接テキストを編集しても構わない。</p>
+<h2 id="インターフェイスの説明">インターフェイスの説明</h2>
+<div class="figure">
+<img src="./guide.png" />
+</div>
+<p>付与すべき対象のテキスト(或いは顔文字)にマウスオーバーすると、 左にそのテキストと、今そのテキストに振られている感情タグが出力される。 複数回クリックすることで、感情タグを付与する。 また、テキストの背景色は今振られている感情タグに対応する。</p>
+<p>初め、テキストに感情タグが振られていない状態の背景色は灰色で、 これが残っているテキストは、実験には用いないことにする。 アノテート作業を途中で放棄する場合には、 その状態を残したまま、次の「結果報告」に進む。</p>
+<p>また、見逃したために、感情タグを振ることを忘れることを防止するため、 または作業の簡易化のためとして、 テキストの最後に</p>
+<ul class="incremental">
+<li>[全て無]</li>
+<li>[全て喜]</li>
+</ul>
+<p>があり、これをクリックすると、そのツイートの中のテキストを全て、 感情なし、喜び、で上書きする。</p>
+<h3 id="結果報告">結果報告</h3>
+<p>アノテート作業を終了する時、 左に出力される、<code>result</code> の文字列をコピーして、 これを何らかの手段で私に送ってください。</p>
+<h2 id="直接ファイルを編集する場合">直接ファイルを編集する場合</h2>
+<p><text>~</text>, <icon>~</icon> に挟まれるテキスト(行単位になっている)を null, yor, ai, odo, ika, haj のいずれかで置き換える</p>
+<h3 id="例-1">例</h3>
+<p>元ファイル</p>
+<pre><code>&lt;text&gt;
+神宮寺さんが誕生日だそうですね
+&lt;/text&gt;
+&lt;icon&gt;
+=＾･ω･＾= |
+&lt;/icon&gt;
+&lt;text&gt;
+高良バ「
+&lt;/text&gt;
+&lt;text&gt;
+レン」
+&lt;/text&gt;
+&lt;text&gt;
+タインデー…
+&lt;/text&gt;
+&lt;icon&gt;
+(・ω・)
+&lt;/icon&gt;
+__EOT__</code></pre>
+<p>アノテート作業後</p>
+<pre><code>&lt;text&gt;
+yor
+&lt;/text&gt;
+&lt;icon&gt;
+yor
+&lt;/icon&gt;
+&lt;text&gt;
+null
+&lt;/text&gt;
+&lt;text&gt;
+null
+&lt;/text&gt;
+&lt;text&gt;
+null
+&lt;/text&gt;
+&lt;icon&gt;
+null
+&lt;/icon&gt;
+__EOT__</code></pre>
+<p>作業を途中で中断する場合などは、 そのままにして、次の「結果報告」に進む。</p>
+<h3 id="結果報告-1">結果報告</h3>
+<p>編集した後のファイルを何らかの手段で私に送ってください。</p>
+</body>
+</html>

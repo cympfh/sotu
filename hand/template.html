@@ -1,19 +1,27 @@
+<!-- vim: set ft=javascript: -->
+<!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
   <title>annotator</title>
   <style>
     div.tw {
-      margin-bottom: 10px;
-      background-color: #eee;
+      display: block;
+      background-color: white;
+      border-bottom: 1px solid #303030;
+      padding: 7px;
+      margin: 7px;
     }
     span {
-      border: 2px #eee dashed;
-      margin: 2px;
+      border: 2px solid white;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
     }
-    .U { background-color: #eee; }
+    .U { background-color: #aaa; }
     .N { background-color: #fff; }
     .Y { background-color: #faa; }
     .A { background-color: #afa; }
-    .O { background-color: #aaa; }
+    .O { background-color: #0aa; }
     .I { background-color: #f00; }
     .H { background-color: #ff0; }
 
@@ -37,40 +45,35 @@
         obj.onmouseover = eventOf(i);
         obj.onclick = eventOf_C(i);
         obj.status_id = i;
+        obj.className = 'U';
         table[i] = 'U';
       }
 
       tws =
         Array.apply(null, document.getElementsByTagName('div'))
+          .slice(0, -1)
           .filter(function(x){ return x.className === 'tw' });
         tws.forEach(function(tw, i) {
-          tw.appendChild(allN(i));
-          tw.appendChild(allY(i));
+          tw.appendChild(all('N', '無', i));
+          tw.appendChild(all('Y', '喜', i));
+          tw.appendChild(all('A', '哀', i));
+          tw.appendChild(all('O', '驚', i));
+          tw.appendChild(all('I', '怒', i));
+          tw.appendChild(all('H', '恥', i));
         });
 
-      function allN(idx) {
+      function all(c, s, idx) {
         var ret = document.createElement('code');
-        ret.innerHTML = '[全て無]';
+        ret.innerHTML = '[全て' + s+ ']';
+        ret.style.color = 'blue';
+        ret.style.cursor = 'pointer';
         ret.onclick = function (e) {
           var ls = Array.apply(null, e.target.parentNode.getElementsByTagName('span'));
           ls.forEach(function(x) {
-            table[x.status_id] = 'N';
-            x.className = 'N';
+            table[x.status_id] = c;
+            x.className = c;
           })
           
-        };
-
-        return ret;
-      }
-      function allY(idx) {
-        var ret = document.createElement('code');
-        ret.innerHTML = '[全て喜]';
-        ret.onclick = function (e) {
-          var ls = Array.apply(null, e.target.parentNode.getElementsByTagName('span'));
-          ls.forEach(function(x) {
-            table[x.status_id] = 'Y';
-            x.className = 'Y';
-          });
         };
         return ret;
       }
