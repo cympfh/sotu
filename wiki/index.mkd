@@ -5,8 +5,7 @@
 ## 素ツイートデータからunitsデータにする
 
 {{{
-  $ TWEETS=./tweets.txt
-  $ make units
+  $ make TWEETS=./tweets.txt units
   $ less /tmp/unit
 }}}
 
@@ -15,17 +14,14 @@ unitsデータから、素性抽出、あるいは手で正解でータを作る
 ## 素性抽出
 
 {{{
-  $ UNITS=/tmp/unit
-  $ make features
+  $ make UNITS=/tmp/unit features
   $ less /tmp/features
 }}}
 
 ## 訓練
 
 {{{
-  $ UNITS=/tmp/unit
-  $ HAND=./hand.txt
-  $ make train
+  $ make UNITS=/tmp/unit HAND=./hand.txt train
 }}}
 
 未実装
@@ -33,8 +29,7 @@ unitsデータから、素性抽出、あるいは手で正解でータを作る
 ## 推定
 
 {{{
-  $ UNITS=/tmp/unit
-  $ make emt
+  $ make UNITS=/tmp/unit emt
 }}}
 
 未実装

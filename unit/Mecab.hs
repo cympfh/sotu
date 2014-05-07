@@ -8,13 +8,14 @@ import Text.Regex.Posix
 mecab :: String -> IO ()
 mecab str = do
   ls <- lines <$> readProcess "mecab" [] str
-  let ls' = merge $ map (\(s, b) -> (s, b =~ "接続詞" :: Bool)) $ map (split '\t') $ init ls
+  let ls' = merge $ map (\(s, b) -> (s, conj b)) $ map (split '\t') $ init ls
   forM_ ls' printTag
   
   where
-  printTag (s, b) =
-    if b then putStrLn "<conj>" >> putStrLn s >> putStrLn "</conj>"
-         else putStrLn "<text>" >> putStrLn s >> putStrLn "</text>"
+    conj b = b =~ "接続詞" || b =~ "接続助詞"
+    printTag (s, b) =
+      if b then putStrLn "<conj>" >> putStrLn s >> putStrLn "</conj>"
+           else putStrLn "<text>" >> putStrLn s >> putStrLn "</text>"
 
 split c xs = split' c xs []
   where
