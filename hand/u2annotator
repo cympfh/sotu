@@ -1,6 +1,6 @@
 #!/bin/sh
 
-UNITS=../tweets/tweet0.txt
+UNITS=$1
 EXPORT=$2
 
 cat template.html > $EXPORT
