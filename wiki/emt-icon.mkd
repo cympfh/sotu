@@ -55,3 +55,13 @@ tweet.txt 及び tweet.hand.txt は [[tweets]] の
 出力は n行、第i行目にA_i の感情タグのセットを空白区切りに出力
 セットの出力順は前提しないこと。
 
+## similarity function
+
+`Sim.hs` としてモジュール化しておこう
+
+{{{
+  sim :: String -> String -> Bool
+}}}
+
+である。
+
