@@ -11,8 +11,10 @@ debug x = trace (show x) x
 mecab :: String -> IO ()
 mecab str = do
   ls <- lines <$> readProcess "mecab" [] str
-  let ls' = merge $ map (\(s, b) -> (s, conj b)) $ map (split '\t') $ init ls
-  forM_ ls' printTag
+  flip forM_ printTag $
+    filter hasSense $
+    merge $
+    map (\(s, b) -> (s, conj b)) $ map (split '\t') $ init ls
   
   where
     conj :: String -> Bool
@@ -35,4 +37,8 @@ merge ((s1, False) : (s2, False) : rest) = merge $ (s1 ++ s2, False) : rest
 merge ((s1, False) : (s2, True) : rest) =
   (s1, False) : (s2, True) : (merge ((s1 ++ s2, False) : rest))
 merge (x : xs) = x : merge xs
+
+-- remove Text contains just punctuation
+hasSense (_, True) = True
+hasSense (x, False) = length x > 1
 
