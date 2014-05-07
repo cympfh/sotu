@@ -17,13 +17,18 @@
 てな形式で出力させれば勝ち。
 
 {{{
-  ./feature tweets.txt > features.txt
+  ./feature < units.txt > features.txt
 }}}
 
-`feature`は、内部で
+`units.txt` は [[unit]] によって分割されたやつ。
+
+`features`は、内部で
 
 - [[ML-Ask]]
 - [[emt-icon]]
 - [[conj-lexicon]]
 
+を使う。
+どれも、複数行受け取って複数行出力さすようにしたから、
+あんまりバンバン呼ばないでやる。
 
