@@ -12,6 +12,7 @@ mecab str = do
   forM_ ls' printTag
   
   where
+    conj :: String -> Bool
     conj b = b =~ "接続詞" || b =~ "接続助詞"
     printTag (s, b) =
       if b then putStrLn "<conj>" >> putStrLn s >> putStrLn "</conj>"
