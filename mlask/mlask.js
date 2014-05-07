@@ -6,6 +6,9 @@ function readFile(fn) {
   return fs.readFileSync(fn, 'utf8');
 }
 
+// directory of lexicons
+var pref = (process.argv[2] ? process.argv[2] : "") + "./emotions/";
+
 var emoTypes =
   [ 'awa', 'haj', 'ika', 'iya', 'kow'
   , 'odo', 'suk', 'tak', 'yas', 'yor'];
@@ -15,7 +18,7 @@ var emotions =
   .map(function(fname, i) {
     return {
         tag : emoTypes[i]
-      , ls  : readFile(process.env.PWD + '/emotions/'+fname+'_uncoded.txt')
+      , ls  : readFile(pref + fname+'_uncoded.txt')
                 .split('\n').slice(0, -1)
     };
   });
