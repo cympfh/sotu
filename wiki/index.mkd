@@ -14,7 +14,7 @@
 2. [[unit]]
 3. [[features]]
     - [[ML-Ask]]
-    - [[icon-lexicon]]
+    - [[emt-icon]]
     - [[conj-lexicon]]
 6. SVM
 
