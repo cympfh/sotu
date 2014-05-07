@@ -3,6 +3,7 @@ import System.IO
 import System.Environment
 import Control.Monad
 import Control.Applicative ((<$>))
+import Sim
 
 main = do
   args <- getArgs
@@ -22,6 +23,3 @@ ems :: [(String, String)] -> String -> [String]
 ems lex icon =
   if ls == [] then ["undefined"] else ls
   where ls = nub [ e | (i2, e) <- lex, sim icon i2]
-
-sim :: String -> String -> Bool
-sim = (==)
