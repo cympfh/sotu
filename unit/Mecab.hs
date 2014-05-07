@@ -3,10 +3,8 @@ module Mecab where
 import Control.Monad
 import Control.Applicative
 import System.Process
-import Text.Regex.Posix
-import Debug.Trace
-
-debug x = trace (show x) x
+-- import Text.Regex.Posix
+import Data.List
 
 mecab :: String -> IO ()
 mecab str = do
@@ -18,7 +16,8 @@ mecab str = do
   
   where
     conj :: String -> Bool
-    conj b = trace (show b) $ b =~ "接続"
+    conj b = "接続詞" `isInfixOf` b || "接続助詞" `isInfixOf` b
+
     printTag (s, b) =
       if b then putStrLn "<conj>" >> putStrLn s >> putStrLn "</conj>"
            else putStrLn "<text>" >> putStrLn s >> putStrLn "</text>"
