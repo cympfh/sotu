@@ -69,11 +69,13 @@
         ret.style.cursor = 'pointer';
         ret.onclick = function (e) {
           var ls = Array.apply(null, e.target.parentNode.getElementsByTagName('span'));
+          console.log(ls);
           ls.forEach(function(x) {
             table[x.status_id] = c;
             x.className = c;
           })
-          
+          display();
+          return false;
         };
         return ret;
       }
@@ -115,6 +117,8 @@
       x = x.replace(/UU/g, "u");
       x = x.replace(/NNNN/g, "m");
       x = x.replace(/NN/g, "n");
+      x = x.replace(/NU/g, 'z');
+      x = x.replace(/UN/g, 'x');
       x = x.replace(/YYYY/g, "t");
       x = x.replace(/YY/g, "y");
       x = x.replace(/AA/g, "a");
@@ -129,7 +133,7 @@
   <div style='float:left;width:18%;position:fixed'>
     mouse over TEXT, and annotate by click<hr>
     <div id=D></div><hr>
-    result: <input id='CODE' onfocus='this.select()' readonly="readonly"><br>(copy this)<hr>
+    result: <textarea> id='CODE' onfocus='this.select()' readonly="readonly"></textarea>(copy this)<hr>
     感情タグ
     <ul>
       <li class='U'> 未(U): まだアノテートしていない

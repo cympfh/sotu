@@ -24,6 +24,10 @@
     .O { background-color: #0aa; }
     .I { background-color: #f00; }
     .H { background-color: #ff0; }
+    textarea {
+      width: 100%;
+             height: 4em;
+    }
 
   </style>
   <script>
@@ -73,8 +77,8 @@
           ls.forEach(function(x) {
             table[x.status_id] = c;
             x.className = c;
-          })
-          
+          });
+          display();
         };
         return ret;
       }
@@ -130,7 +134,7 @@
   <div style='float:left;width:18%;position:fixed'>
     mouse over TEXT, and annotate by click<hr>
     <div id=D></div><hr>
-    result: <input id='CODE' onfocus='this.select()' readonly="readonly"><br>(copy this)<hr>
+    result: <textarea id='CODE' onfocus='this.select()' readonly="readonly"></textarea>(copy this)<hr>
     感情タグ
     <ul>
       <li class='U'> 未(U): まだアノテートしていない

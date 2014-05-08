@@ -5,6 +5,8 @@ var ls =
 
 var code = 
   fs.readFileSync('/dev/stdin', 'utf8')
+    .replace(/z/g, 'NU')
+    .replace(/x/g, 'UN')
     .replace(/w/g, 'UUUUUUUU')
     .replace(/v/g, 'UUUU')
     .replace(/u/g, 'UU')
@@ -25,7 +27,7 @@ var show = {
   'A' : "ai",
   'O' : "odo",
   'I' : "ika",
-  'H' : "haj"
+  'H' : "haj",
 };
 
 var cx = 0;
@@ -38,22 +40,32 @@ for (var i=0; i < ls.length; ++i) {
     console.log(l);
     flg = true;
   } else if (l === '</icon>') {
+    if (flg === true) { // 消費されなかった
+      flg = false;
+      console.log(show[code[cx]]);
+      ++cx;
+    }
     console.log(l);
   } else if (l === '<text>') {
     console.log(l);
     flg = true;
   } else if (l === '</text>') {
+    if (flg === true) { // 消費されなかった
+      flg = false;
+      console.log(show[code[cx]]);
+      ++cx;
+    }
     console.log(l);
   } else if (l === '<conj>') {
     console.log(l);
   } else if (l === '</conj>') {
     console.log(l);
   } else if (flg) {
-    console.log(show[code[cx]]);
+    console.log(l, show[code[cx]]);
     flg = false;
     ++cx;
   } else {
     console.log(l);
   }
 }
-
+console.warn(cx, code.length);
