@@ -1,5 +1,3 @@
 #!/bin/bash
 # node decode.js ../tweets/tweet0.txt <<< "YwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwUYwwwuYwwwwwwwwuU"
 
-CODE=YmYnaAynOyYutIYOtttttNYmzNYmYmNYnynzmNanANtynYzUxmmNoYmNzxNtNzwUxmzwxmmAmmmmmmmtYmiIvUxNtmmmNyNzvUxNzwwvuUYmmmmmmmaAOnynNyY
-node decode.js ~/Dropbox/tw/u08.txt <<< $CODE > ~/Dropbox/tw/hand08.txt

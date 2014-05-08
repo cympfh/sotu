@@ -61,7 +61,7 @@ for (var i=0; i < ls.length; ++i) {
   } else if (l === '</conj>') {
     console.log(l);
   } else if (flg) {
-    console.log(l, show[code[cx]]);
+    console.log(show[code[cx]]);
     flg = false;
     ++cx;
   } else {

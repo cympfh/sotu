@@ -18,7 +18,7 @@
       cursor: pointer;
     }
     .U { background-color: #aaa; }
-    .N { background-color: #fff; }
+    .N { background-color: #fff; border: 1px dotted black; }
     .Y { background-color: #faa; }
     .A { background-color: #afa; }
     .O { background-color: #0aa; }
@@ -59,6 +59,7 @@
           .filter(function(x){ return x.className === 'tw' });
         tws.forEach(function(tw, i) {
           tw.appendChild(document.createElement('br'));
+          tw.appendChild(all('U', '未 (reset)', i));
           tw.appendChild(all('N', '無', i));
           tw.appendChild(all('Y', '喜', i));
           tw.appendChild(all('A', '哀', i));
@@ -82,6 +83,37 @@
         };
         return ret;
       }
+
+      // restore!
+      if (localStorage && 'r' in localStorage) {
+        var x = localStorage['r'];
+        CODE.value = x;
+        x = x.replace(/z/g, 'NU');
+        x = x.replace(/x/g, 'UN');
+        x = x.replace(/w/g, "UUUUUUUU");
+        x = x.replace(/v/g, "UUUU");
+        x = x.replace(/u/g, "UU");
+        x = x.replace(/m/g, "NNNN");
+        x = x.replace(/n/g, "NN");
+        x = x.replace(/t/g, "YYYY");
+        x = x.replace(/y/g, "YY");
+        x = x.replace(/a/g, "AA");
+        x = x.replace(/o/g, "OO");
+        x = x.replace(/i/g, "II");
+        x = x.replace(/h/g, "HH");
+        for (var i=0; i<x.length; ++i) {
+          table[i] = x[i];
+          spans[i].className = x[i];
+          // console.log(table[i], x[i], spans[i]);
+        }
+        E.innerHTML = 'restored!';
+      }
+
+    }
+    function save() {
+      if (!localStorage) return;
+      localStorage['r'] = encode();
+      E.innerHTML = 'saved at '+ (new Date()).toString();
     }
     function eventOf(idx) {
       return function(e) {
@@ -99,6 +131,7 @@
         D.innerHTML += '<br>';
         D.innerHTML += '感情タグ: ' + show[table[idx]];
         e.target.className = table[idx];
+        save();
         return false;
       }
     }
@@ -113,7 +146,12 @@
       else if (x === 'H') x = 'U';
       table[idx] = x;
     }
+
     function display() {
+      CODE.value = encode();
+    }
+
+    function encode() {
       var x = table.join('');
       x = x.replace(/NU/g, 'z')
       x = x.replace(/UN/g, 'x')
@@ -128,13 +166,13 @@
       x = x.replace(/OO/g, "o");
       x = x.replace(/II/g, "i");
       x = x.replace(/HH/g, "h");
-      CODE.value = x;
+      return x;
     }
 
   </script>
 <body onload='init()'>
   <div style='float:left;width:18%;position:fixed'>
-    mouse over TEXT, and annotate by click<hr>
+    <div id=E>mouse over TEXT, and annotate by click</div><hr>
     <div id=D></div><hr>
     result: <textarea id='CODE' onfocus='this.select()' readonly="readonly"></textarea>(copy this)<hr>
     感情タグ
