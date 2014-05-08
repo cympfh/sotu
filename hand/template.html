@@ -54,6 +54,7 @@
           .slice(0, -1)
           .filter(function(x){ return x.className === 'tw' });
         tws.forEach(function(tw, i) {
+          tw.appendChild(document.createElement('br'));
           tw.appendChild(all('N', '無', i));
           tw.appendChild(all('Y', '喜', i));
           tw.appendChild(all('A', '哀', i));

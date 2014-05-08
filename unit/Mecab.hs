@@ -34,7 +34,7 @@ merge [] = []
 merge [x] = [x]
 merge ((s1, False) : (s2, False) : rest) = merge $ (s1 ++ s2, False) : rest
 merge ((s1, False) : (s2, True) : rest) =
-  (s1, False) : (s2, True) : (merge ((s1 ++ s2, False) : rest))
+  (s1, False) : (s2, True) : merge rest
 merge (x : xs) = x : merge xs
 
 -- remove Text contains just punctuation
