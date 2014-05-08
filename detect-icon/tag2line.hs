@@ -17,6 +17,11 @@ printT ('\n' : cs) ("I":xs) = do
   putStrLn eot
   printT cs ("B":xs)
 
+printT (c : '\n' : cs) ("O" : "B" : xs) = do
+  putChar c
+  putStrLn eot
+  printT cs ("B":xs)
+
 printT ('\n' : cs) xs = putStrLn eot >> printT cs xs
 
 printT (c : cs) ("O" : "B" : xs) = do
