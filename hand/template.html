@@ -26,7 +26,7 @@
     .H { background-color: #ff0; }
     textarea {
       width: 100%;
-             height: 4em;
+             height: 5em;
     }
 
   </style>
@@ -115,6 +115,8 @@
     }
     function display() {
       var x = table.join('');
+      x = x.replace(/NU/g, 'z')
+      x = x.replace(/UN/g, 'x')
       x = x.replace(/UUUUUUUU/g, "w");
       x = x.replace(/UUUU/g, "v");
       x = x.replace(/UU/g, "u");
