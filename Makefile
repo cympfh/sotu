@@ -14,3 +14,8 @@ units:
 features:
 	runghc ./features.hs < $(UNITS) > /tmp/features
 
+svm-train:
+	echo $(FEATURES)
+	echo $(HAND)
+	./svm/svm-train.exe $(FEATURES) $(HAND)
+

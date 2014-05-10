@@ -1,0 +1,18 @@
+実験用のツイートデータはここではなく
+`Dropbox/tw/`
+においてある。
+
+r08.txt
+100件ランダムに選んだ素ツイートデータ
+
+u08.txt: r08.txt
+テキストをユニットに区切ったもの (xml)
+
+a08.html: u08.txt
+手でアノテートするためのもの
+
+hand08.html: a08.txt
+u08.txt に対して<text>, <conj> をアノテートしたもの
+
+feature08.txt: u08.txt
+mlask, conj, emt-icon を用いて、素性抽出したもの
