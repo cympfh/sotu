@@ -43,7 +43,7 @@ unitsデータから、素性抽出、あるいは手で正解でータを作る
     - [[emt-icon]]
     - [[conj-lexicon]]
 4. [[hand]]
-6. SVM
+6. [[SVM]]
 
 # 他ファイル
 
