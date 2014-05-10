@@ -1,0 +1,5 @@
+`svm^{light}` 使ってみます。
+
+# train
+
+inputs: hand.txt features
