@@ -1,3 +1,5 @@
+test: svm-train
+
 all:
 	cat Makefile
 
@@ -13,6 +15,9 @@ units:
 # units -> features
 features:
 	runghc ./features.hs < $(UNITS) > /tmp/features
+
+FEATURES=~/Dropbox/tw/feature08.txt
+HAND=~/Dropbox/tw/hand08.txt
 
 svm-train:
 	echo $(FEATURES)

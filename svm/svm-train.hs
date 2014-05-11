@@ -3,7 +3,7 @@ import System.Environment
 import Control.Monad
 import Control.Applicative
 
-data It = Icon String | Text String | Conj String | EOT deriving Show
+data It = Icon String | Text String | Conj String | EOT deriving (Show, Eq)
 
 icon (Icon _) = True
 icon _ = False
@@ -35,12 +35,9 @@ main = do
           p' _ _ = undefined
 
       splitByEOT :: [It] -> [[It]]
-      splitByEOT [] = [[]]
-      splitByEOT xs = 
-        let (a, rest) = split EOT xs
-        in a : splitByEOT rest
-          where
-            split x [] = ([], [])
-            split x (y:ys)
-              | x == y    = ([], ys)
-              | otherwise = 
+      splitByEOT [] = []
+      splitByEOT xs =
+        let a = takeWhile ((/=) EOT) xs
+            n = length a
+            b = drop (n+1) xs
+        in a : splitByEOT b
