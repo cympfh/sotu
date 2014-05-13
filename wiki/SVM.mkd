@@ -3,3 +3,17 @@
 # train
 
 inputs: hand.txt features
+
+## svm-train.hs
+
+入力ファイルの読み込み、パース、ツイートごとに区切って、
+ツイートごとに、`PrintF.hs` 中の `PrintF` を呼び出す。
+
+## PrintF.hs (printF)
+
+ここで、undefined を含んでたら `return ()` する。
+さもなくば、素性を出力する。
+svm^{light} の訓練データの一行に相当する。
+また、大切な素性の選択は、このファイルを書き換えることになる。
+
+

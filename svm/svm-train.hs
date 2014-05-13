@@ -2,27 +2,16 @@ import System.IO
 import System.Environment
 import Control.Monad
 import Control.Applicative
+import It
+import PrintF
 
-data It = Icon String | Text String | Conj String | EOT deriving (Show, Eq)
-
-icon (Icon _) = True
-icon _ = False
-text (Text _) = True
-text _ = False
-conj (Conj _) = True
-conj _ = False
-
-ofIt :: It -> String
-ofIt (Icon x) = x
-ofIt (Text x) = x
-ofIt (Conj x) = x
-ofIt EOT = undefined
-
+main :: IO ()
 main = do
   args <- getArgs
-  fs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 0)
-  hs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 1)
-  print fs
+  em <- return $ args !! 0
+  fs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 1)
+  hs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 2)
+  mapM_ (printF em) $ zip fs hs
 
     where
       parse xs = p' xs []

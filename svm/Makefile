@@ -1,6 +1,6 @@
 all: svm-train.exe
 
-%.exe: %.hs
+svm-train.exe: svm-train.hs It.hs PrintF.hs Em.hs
 	ghc -O3 $^ -o $@
 
 clean:

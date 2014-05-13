@@ -20,7 +20,6 @@ FEATURES=~/Dropbox/tw/feature08.txt
 HAND=~/Dropbox/tw/hand08.txt
 
 svm-train:
-	echo $(FEATURES)
-	echo $(HAND)
-	./svm/svm-train.exe $(FEATURES) $(HAND)
+	./svm/svm-train.sh "null" $(FEATURES) $(HAND) | egrep "Acc|Prec"
+	./svm/svm-train.sh "yor" $(FEATURES) $(HAND) | egrep "Acc|Prec"
 
