@@ -1,5 +1,3 @@
-test: svm-train
-
 all:
 	cat Makefile
 
