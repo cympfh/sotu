@@ -10,7 +10,9 @@ EM=$1
 FE=$2
 HD=$3
 ./svm/svm-train.exe $EM $FE $HD | sort -R > /tmp/it.train
-head -n 260 /tmp/it.train > /tmp/it.head
-tail -n 21 /tmp/it.train > /tmp/it.tail
+
+count=`wc /tmp/it.train | cut -d' ' -f2`
+head -n $((count / 10 * 9)) /tmp/it.train > /tmp/it.head
+tail -n $((count / 10)) /tmp/it.train > /tmp/it.tail
 svm_learn /tmp/it.head /tmp/it.model
 svm_classify -v 3 /tmp/it.tail /tmp/it.model /tmp/result

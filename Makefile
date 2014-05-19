@@ -20,4 +20,5 @@ HAND=~/Dropbox/tw/hand08.txt
 svm-train:
 	./svm/svm-train.sh "null" $(FEATURES) $(HAND) | egrep "Acc|Prec"
 	./svm/svm-train.sh "yor" $(FEATURES) $(HAND) | egrep "Acc|Prec"
+	./svm/svm-train.sh "ika" $(FEATURES) $(HAND) | egrep "Acc|Prec"
 

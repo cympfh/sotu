@@ -17,6 +17,7 @@ getIDs = map getID . words
     getID "yor" = 1
     getID "suk" = 1
     getID "yas" = 1
+    getID "tak" = 1
 
     getID "ai"  = 2
     getID "iya" = 2
