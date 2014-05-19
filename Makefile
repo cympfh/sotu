@@ -17,8 +17,13 @@ features:
 FEATURES=~/Dropbox/tw/feature08.txt
 HAND=~/Dropbox/tw/hand08.txt
 
-svm-train:
-	./svm/svm-train.sh "null" $(FEATURES) $(HAND) | egrep "Acc|Prec"
-	./svm/svm-train.sh "yor" $(FEATURES) $(HAND) | egrep "Acc|Prec"
-	./svm/svm-train.sh "ika" $(FEATURES) $(HAND) | egrep "Acc|Prec"
+cross:
+	./svm/test-cross.sh "null" $(FEATURES) $(HAND) | tail -n 11
+	./svm/test-cross.sh "yor" $(FEATURES) $(HAND) | tail -n 11
+	./svm/test-cross.sh "ika" $(FEATURES) $(HAND) | tail -n 11
+
+light:
+	./svm/test-light.sh "null" $(F1) $(H1) $(F2) $(H2) | tail -n 2
+	./svm/test-light.sh "yor" $(F1) $(H1) $(F2) $(H2) | tail -n 2
+	./svm/test-light.sh "ika" $(F1) $(H1) $(F2) $(H2) | tail -n 2
 

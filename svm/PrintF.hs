@@ -35,16 +35,43 @@ printF' em (f, h) = do
 printFeatureSet :: (Array Int It) -> Int -> IO ()
 printFeatureSet ar i =
   putStrLn $ format $
-    cur_t ++ prev_t ++ next_t ++ prev_i
+    concat $
+      [cur_t
+      , prev_t, next_t
+
+      , prev'_t, next'_t
+      , prev_i, next_i
+      , prev_c
+
+      , mae_t, ato_t
+      ]
     where
       -- 素性の選択!!
       -- select features !!
+      --
       cur_t = getBinary text ar i
+
       prev_t = getBinary text ar (i-1)
       next_t = getBinary text ar (i+1)
+      prev'_t = getBinary text ar (i-2)
+      next'_t = getBinary text ar (i+2)
       prev_i = getBinary icon ar (i-1)
       next_i = getBinary icon ar (i+1)
       prev_c = C.getBinary ar (i-1)
+
+      mae_t = getBinary text ar $ mae text ar (i-1)
+      ato_t = getBinary text ar $ ato text ar (i+1)
+
+      mae pred arr i
+        | i < 0  = -1
+        | pred (arr ! i) = i
+        | otherwise      = mae pred arr (i-1)
+
+      ato pred arr i
+        | max < i        = i + 1
+        | pred (arr ! i) = i
+        | otherwise      = ato pred arr (i+1)
+          where (_, max) = bounds arr
 
 format :: [Bool] -> String
 format bs = unwords $ map pairFormat ls

@@ -7,9 +7,11 @@ import Debug.Trace
 getBinary :: (Array Int It) -> Int -> [Bool]
 getBinary ar idx
   | idx < min || max < idx = bin (-1)
-  | otherwise              = getID $ ofIt $ ar ! idx
+  | conj it        = getID $ ofIt it
+  | otherwise      = bin (-1)
   where
     (min, max) = bounds ar
+    it = ar ! idx
 
 getID :: String -> [Bool]
 -- "Other" -> [False,False,False,False,False,False,True]
