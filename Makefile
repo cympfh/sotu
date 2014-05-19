@@ -14,7 +14,7 @@ units:
 
 # units -> features
 features:
-	runghc ./features.hs < $(UNITS) > /tmp/features
+	runghc ./features.hs < $(UNITS) > $(OUTPUT)
 
 FEATURES=~/Dropbox/tw/feature08.txt
 HAND=~/Dropbox/tw/hand08.txt

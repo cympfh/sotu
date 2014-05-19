@@ -1,7 +1,14 @@
-形式は [[tweets]] を参照のこと。
-unitsの<text>, <icon> について テキストを感情タグで置き換える。
+# ユニットファイルから、人手データを作る．
 
-{{{
+## データの形式
+
+データ自体の形式は
+詳細には[[tweets]] を参照．
+大雑把に書いておくと、
+unitsの<text>, <icon> について テキストを感情タグで置き換えただけのもので、
+以下のようなもの．
+
+{{{ units
   <text>
   ほげ
   </text>
@@ -13,7 +20,7 @@ unitsの<text>, <icon> について テキストを感情タグで置き換え�
   </conj>
 }}}
 
-{{{
+{{{ hand
   <text>
   yor
   </text>
@@ -25,4 +32,11 @@ unitsの<text>, <icon> について テキストを感情タグで置き換え�
   </conj>
 }}}
 
+## ツール
 
+アノテートを手助けするインターフェイスとして
+
+{{{bash
+  hand$ ./u2annotator ~/Dropbox/tw/iraira.unit.txt /tmp/test.html
+  hand$ firefox /tmp/test.html
+}}}

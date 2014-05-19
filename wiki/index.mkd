@@ -5,8 +5,7 @@
 ## 素ツイートデータからunitsデータにする
 
 {{{
-  $ make TWEETS=./tweets.txt units
-  $ less /tmp/unit
+  $ make TWEETS=~/Dropbox/tw/iraira.txt OUTPUT=~/Dropbox/tw/iraira.unit.txt units
 }}}
 
 unitsデータから、素性抽出、あるいは手で正解でータを作る
@@ -14,8 +13,7 @@ unitsデータから、素性抽出、あるいは手で正解でータを作る
 ## 素性抽出
 
 {{{
-  $ make UNITS=/tmp/unit features
-  $ less /tmp/features
+  $ make UNITS=~/Dropbox/tw/iraira.unit.txt OUTPUT=~/Dropbox/tw/iraira.f.txt features
 }}}
 
 ## 訓練
