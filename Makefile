@@ -14,13 +14,13 @@ units:
 features:
 	runghc ./features.hs < $(UNITS) > $(OUTPUT)
 
-FEATURES=~/Dropbox/tw/feature08.txt
-HAND=~/Dropbox/tw/hand08.txt
+F=~/Dropbox/tw/iraira/head200.f
+H=~/Dropbox/tw/iraira/head200.hand
 
 cross:
-	./svm/test-cross.sh "null" $(FEATURES) $(HAND) | tail -n 11
-	./svm/test-cross.sh "yor" $(FEATURES) $(HAND) | tail -n 11
-	./svm/test-cross.sh "ika" $(FEATURES) $(HAND) | tail -n 11
+	./svm/test-cross.sh "null" $(F) $(H) | tail -n 11
+	./svm/test-cross.sh "yor" $(F) $(H) | tail -n 11
+	# ./svm/test-cross.sh "ika" $(F) $(H) | tail -n 11
 
 light:
 	./svm/test-light.sh "null" $(F1) $(H1) $(F2) $(H2) | tail -n 2

@@ -7,13 +7,13 @@ else
 fi
 
 EM=$1
-FE=$2
-HD=$3
-FE2=$4
-HD2=$5
+F1=$2
+H1=$3
+F2=$4
+H2=$5
 
-./svm/svm-train.exe $EM $FE $HD | sort -R > /tmp/it.train
-./svm/svm-train.exe $EM $FE2 $HD2 | sort -R > /tmp/it.train2
+${TRAIN} $EM $F1 $H1 > /tmp/it.train
+${TRAIN} $EM $F2 $H2 > /tmp/it.train2
 
 svm_learn /tmp/it.train /tmp/it.model
 svm_classify -v 3 /tmp/it.train2 /tmp/it.model /tmp/result
