@@ -51,6 +51,7 @@ var word = process.argv[2] || "#イライラ" // search word (UTF-8)
 
   function end(result) {
     result = result.filter(not_bot);
+    console.warn('got ' + result.length + ' tweets');
     console.log('%j', result);
   }
 
