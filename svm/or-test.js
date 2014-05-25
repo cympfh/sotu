@@ -1,9 +1,13 @@
 var fs = require('fs')
   , SVM = require('svm').SVM
-  , options = { C : 0.99, kernel : 'rbf', rbfSigma : 0.6 }
   , trainFile = process.argv[2]
   , pref = process.argv[3]
+  , svmC = +process.argv[4] || 0.99
+  , svmRbfsigma = +process.argv[5] || 0.6
+  , options = { kernel : 'rbf', C: svmC, rbfsigma: svmRbfsigma }
   ;
+
+console.warn(options);
 
 fs.readFile(trainFile, 'utf8', function(err, datum) {
   main( datum.split('\n').slice(0, -1) );
@@ -44,12 +48,15 @@ function main(ls) {
 
   // train
   for (var e in labelss) {
+    console.warn('training for ' + e);
     svms[e] = new SVM();
     svms[e].train(datum.slice(0, N),
                   labelss[e].slice(0, N),
                   options);
     // fs.writeFile(pref + '/' + e + '.json', JSON.stringify(asvm.toJSON(), null, 2));
   }
+
+  console.warn('tagging and counting');
 
   // tagging
   var ms = {};

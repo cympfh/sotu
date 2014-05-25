@@ -6,11 +6,14 @@ CROSS=./svm/or-test.js
 FE=$1
 HD=$2
 
+C=$3
+S=$4
+
 $PRINTF $FE $HD > /tmp/it.train
 # svm-scale /tmp/it.train > /tmp/it.scaled
 # mv /tmp/it.scaled /tmp/it.train
 
-node $CROSS /tmp/it.train /tmp
+node $CROSS /tmp/it.train /tmp $C $S
 
 # svm-train -t 2 -v 10 -c 32 -g 0.0078 /tmp/it.scaled
 

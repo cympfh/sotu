@@ -3,7 +3,16 @@
 PREF=$HOME/Dropbox/tw
 DIRS='08 emem ira200'
 
-for d in $DIRS; do
-  echo $d
-  ./svm/test-cross.sh $PREF/$d/f $PREF/$d/h
+CS='0.2 0.4 0.8 1.0 2.0'
+SS='0.125 0.25 0.5 0.8 1.6 3.2'
+
+for c in $CS; do
+  for s in $SS; do
+    echo "# C=${c}, sigma=${s}"
+    for d in $DIRS; do
+      echo '##' $d
+      ./svm/test-cross.sh $PREF/$d/f $PREF/$d/h $c $s
+    done
+    sleep 5
+  done
 done
