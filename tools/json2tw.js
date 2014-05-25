@@ -9,5 +9,6 @@ for (var i=0; i<tw.length; ++i) {
   text = text.replace(/@[^ 　]*/g, ' ');
   text = text.replace(/http[:a-zA-Z0-9\-_\/\.\:]*/g, ' ');
   text = text.trim();
+  if (text === '') continue;
   console.log(text);
 }

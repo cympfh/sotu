@@ -56,7 +56,7 @@ var word = process.argv[2] || "#イライラ" // search word (UTF-8)
 
   function not_bot(tw) {
     var s = tw.source;
-    var b = /twittbot|ぼっと|makebot|ツール|tool|動画|Button/.test(s);
+    var b = /twittbot|ぼっと|makebot|ツール|tool|動画|Button|yahoo/.test(s);
     return !b;
   }
 
