@@ -31,18 +31,24 @@
 
   </style>
   <script>
+
     var table = [];
     var show = {
-      'U' : '未',
-      'N' : '無',
-      'Y' : '喜',
-      'A' : '哀',
-      'O' : '驚',
-      'I' : '怒',
-      'H' : '恥'
+      U: '未',
+      N: '無',
+      Y: '喜',
+      A: '哀',
+      O: '驚',
+      I: '怒',
+      H: '恥'
     };
+    var key;
 
     function init() {
+      key = location.href.slice(
+          location.href.lastIndexOf('/')+1,
+          location.href.length);
+
       var spans = document.getElementsByTagName('span');
       for (var i=0; i < spans.length; ++i) {
         var obj = spans[i];
@@ -57,16 +63,17 @@
         Array.apply(null, document.getElementsByTagName('div'))
           .slice(0, -1)
           .filter(function(x){ return x.className === 'tw' });
-        tws.forEach(function(tw, i) {
-          tw.appendChild(document.createElement('br'));
-          tw.appendChild(all('U', '未 (reset)', i));
-          tw.appendChild(all('N', '無', i));
-          tw.appendChild(all('Y', '喜', i));
-          tw.appendChild(all('A', '哀', i));
-          tw.appendChild(all('O', '驚', i));
-          tw.appendChild(all('I', '怒', i));
-          tw.appendChild(all('H', '恥', i));
-        });
+
+      tws.forEach(function(tw, i) {
+        tw.appendChild(document.createElement('br'));
+        tw.appendChild(all('U', '未 (reset)', i));
+        tw.appendChild(all('N', '無', i));
+        tw.appendChild(all('Y', '喜', i));
+        tw.appendChild(all('A', '哀', i));
+        tw.appendChild(all('O', '驚', i));
+        tw.appendChild(all('I', '怒', i));
+        tw.appendChild(all('H', '恥', i));
+      });
 
       function all(c, s, idx) {
         var ret = document.createElement('code');
@@ -86,8 +93,8 @@
       }
 
       // restore!
-      if (localStorage && 'r' in localStorage) {
-        var x = localStorage['r'];
+      if (localStorage && key in localStorage) {
+        var x = localStorage[key];
         CODE.value = x;
         x = x.replace(/z/g, 'NU');
         x = x.replace(/x/g, 'UN');
@@ -113,8 +120,7 @@
     }
     function save() {
       if (!localStorage) return;
-      localStorage['r'] = encode();
-      E.innerHTML = 'saved at '+ (new Date()).toString();
+      localStorage[key] = encode();
     }
     function eventOf(idx) {
       return function(e) {
