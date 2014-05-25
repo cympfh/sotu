@@ -23,7 +23,8 @@ main = do
         | grow      = (twf : acf, twh : ach, (e0+d0, e1+d1, e2+d2, e3+d3, e4+d4, e5+d5))
         | otherwise = (acf, ach, es)
           where (d0, d1, d2, d3, d4, d5) = count twh
-                grow = (e0 < 50 && d0 > 0) || (e1 < 50 && d1 > 0) || (e2 < 50 && d2 > 0) || (e3 < 50 && d3 > 0) || (e4 < 50 && d4 > 0) || (e5 < 50 && d5 > 0)
+                -- grow = (e0 < 50 && d0 > 0) || (e1 < 50 && d1 > 0) || (e2 < 50 && d2 > 0) || (e3 < 50 && d3 > 0) || (e4 < 50 && d4 > 0) || (e5 < 50 && d5 > 0)
+                grow = (e2 < 50 && d2 > 0) || (e3 < 50 && d3 > 0) || (e4 < 50 && d4 > 0) || (e5 < 50 && d5 > 0)
                 hasUndef = any (== "undefined") $ map fromText $ filter textp twh
 
 

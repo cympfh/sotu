@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PREF=$HOME/Dropbox/tw
+FROM='cat_balanced'
+TO='08'
+
+c=0.8
+s=0.8
+
+echo '## ' $FROM '->' $TO
+./svm/test-bridge.sh $PREF/$FROM $PREF/$TO $c $s

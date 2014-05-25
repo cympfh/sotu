@@ -26,10 +26,13 @@ function main(ls) {
     , datum = []
 
     , len = ls.length
-    , N = len * 0.9 | 0 // for train
 
     , svms = {}
     ;
+
+  tp = {};
+  fn = {};
+  fp = {};
 
   // read
   for (var i=0; i < len; ++i) {
@@ -46,47 +49,59 @@ function main(ls) {
     datum.push(d);
   }
 
-  // train
-  for (var e in labelss) {
-    console.warn('training for ' + e);
-    svms[e] = new SVM();
-    svms[e].train(datum.slice(0, N),
-                  labelss[e].slice(0, N),
-                  options);
-    // fs.writeFile(pref + '/' + e + '.json', JSON.stringify(asvm.toJSON(), null, 2));
-  }
-
-  console.warn('tagging and counting');
-
-  // tagging
-  var ms = {};
-  for (var e in labelss) {
-    ms[e] = svms[e].margins(datum.slice(N, len));
-  }
-  result = map_max(ms);
-
-  // count and display result
-  count(result);
-
-  function count(result) {
+  var K = 3;
+  for (var k=0; k < K; ++k) {
+    console.warn(k);
+    var k1 = k * len / K | 0
+      , k2 = (k+1) * len / K | 0;
+    tr_datum = datum.slice(0, k1).concat(datum.slice(k2, len));
+    tr_labelss = {};
     for (var e in labelss) {
-      var tp = 0
-        , fn = 0
-        , fp = 0
-        ;
-      for (var i=N; i < len; ++i) {
-        var correct = labels[i]
-          , answer = result[i-N]
-          ;
-        if (answer === e && correct === e) ++tp;
-        if (answer === e && correct !== e) ++fp;
-        if (answer !== e && correct === e) ++fn;
-      }
-      console.log('%s: %d %d %d', e, 
-          tp/(tp+fp),
-          tp/(tp+fn),
-          2 / ( (tp+fp) / tp  + (tp+fn) / tp));
+      tr_labelss[e] = labelss[e].slice(0, k1).concat(labelss[e].slice(k2, len));
     }
+
+    te_datum = datum.slice(k1, k2);
+    te_labelss = {};
+    for (var e in labelss) {
+      te_labelss[e] = labelss[e].slice(k1, k2);
+    }
+
+    // train
+    for (var e in labelss) {
+      console.warn('training for ' + e);
+      svms[e] = new SVM();
+      svms[e].train(tr_datum, tr_labelss[e], options);
+      // fs.writeFile(pref + '/' + e + '.json', JSON.stringify(asvm.toJSON(), null, 2));
+    }
+    console.warn('tagging and counting');
+
+    // tagging
+    var ms = {};
+    for (var e in labelss) {
+      ms[e] = svms[e].margins(te_datum);
+    }
+    result = map_max(ms);
+
+    for (var e in labelss) {
+      if (!(e in tp)) {
+        tp[e] = fn[e] = fp[e] = 0;
+      }
+      for (var i=0; i < result.length; ++i) {
+        var correct = labels[i + k1]
+          , answer = result[i]
+          ;
+        if (answer === e && correct === e) ++tp[e];
+        if (answer === e && correct !== e) ++fp[e];
+        if (answer !== e && correct === e) ++fn[e];
+      }
+    }
+  }
+
+  for (var e in labelss) {
+    console.log('%s: %d %d %d', e, 
+        tp[e]/(tp[e]+fp[e]),
+        tp[e]/(tp[e]+fn[e]),
+        2 / ( (tp[e]+fp[e]) / tp[e]  + (tp[e]+fn[e]) / tp[e]));
   }
 
   function push(label) {
