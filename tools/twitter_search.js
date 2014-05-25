@@ -7,8 +7,8 @@ var me = require(process.env.HOME+'/Dropbox/node/setting.json').users.sympf
   , tw = new require("ntwitter")(me)
   ;
 
-var word = "#イライラ" // search word (UTF-8)
-  , count = 400 // num of tweets
+var word = process.argv[2] || "#イライラ" // search word (UTF-8)
+  , count = process.argv[3] || 1000 // num of tweets
   , lang = "ja" // japanese
   , type = "recent" // mixed | recent | popular
   ;
