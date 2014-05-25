@@ -1,6 +1,6 @@
-all: svm-train.exe
+all: svm-features.exe
 
-svm-train.exe: svm-train.hs It.hs PrintF.hs Em.hs Conj.hs
+svm-features.exe: svm-features.hs It.hs PrintF.hs Em.hs Conj.hs
 	ghc -O3 $^ -o $@
 
 clean:
