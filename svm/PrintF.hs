@@ -36,42 +36,54 @@ printFeatureSet :: (Array Int It) -> Int -> IO ()
 printFeatureSet ar i =
   putStrLn $ format $
     concat $
-      [cur_t
-      , prev_t, next_t
+      [ cur_t
 
-      , prev'_t, next'_t
+      , before_1_t, before_2_t, before_3_t
+      , after_1_t, after_2_t, after_3_t
+
       , prev_i, next_i
-      , prev_c
 
-      , mae_t, ato_t
+      , before_1_c
+      , after_1_c
       ]
     where
-      -- 素性の選択!!
-      -- select features !!
+      --
+      -- IMPORTANT
       --
       cur_t = getBinary text ar i
 
-      prev_t = getBinary text ar (i-1)
-      next_t = getBinary text ar (i+1)
-      prev'_t = getBinary text ar (i-2)
-      next'_t = getBinary text ar (i+2)
+      before_1_t = getBinary text ar $ mae text ar i 1
+      before_2_t = getBinary text ar $ mae text ar i 2
+      before_3_t = getBinary text ar $ mae text ar i 3
+
+      after_1_t = getBinary text ar $ ato text ar i 1
+      after_2_t = getBinary text ar $ ato text ar i 2
+      after_3_t = getBinary text ar $ ato text ar i 3
+
       prev_i = getBinary icon ar (i-1)
       next_i = getBinary icon ar (i+1)
-      prev_c = C.getBinary ar (i-1)
 
-      mae_t = getBinary text ar $ mae text ar (i-1)
-      ato_t = getBinary text ar $ ato text ar (i+1)
+      before_1_c = C.getBinary ar $ mae conj ar i 1
+      after_1_c = C.getBinary ar $ ato conj ar i 1
 
-      mae pred arr i
-        | i < 0  = -1
-        | pred (arr ! i) = i
-        | otherwise      = mae pred arr (i-1)
+      mae pred ar idx count =
+        let idxes = iterate (mae' pred ar) idx
+        in idxes !! count
+          where
+            mae' pred arr i
+              | i < 0  = -1
+              | pred (arr ! i) = i
+              | otherwise      = mae' pred arr (i-1)
 
-      ato pred arr i
-        | max < i        = i + 1
-        | pred (arr ! i) = i
-        | otherwise      = ato pred arr (i+1)
-          where (_, max) = bounds arr
+      ato pred ar idx count =
+        let idxes = iterate (ato' pred ar) idx
+        in idxes !! count
+          where
+            ato' pred arr i
+              | max < i        = i + 1
+              | pred (arr ! i) = i
+              | otherwise      = ato' pred arr (i+1)
+                where (_, max) = bounds arr
 
 format :: [Bool] -> String
 format bs = unwords $ map pairFormat ls

@@ -14,14 +14,6 @@ units:
 features:
 	runghc ./features.hs < $(UNITS) > $(OUTPUT)
 
-F=~/Dropbox/tw/iraira/head200.f
-H=~/Dropbox/tw/iraira/head200.hand
-
-cross:
-	./svm/test-cross.sh "null" $(F) $(H) | tail -n 11
-	./svm/test-cross.sh "yor" $(F) $(H) | tail -n 11
-	# ./svm/test-cross.sh "ika" $(F) $(H) | tail -n 11
-
 light:
 	./svm/test-light.sh "null" $(F1) $(H1) $(F2) $(H2) | tail -n 2
 	./svm/test-light.sh "yor" $(F1) $(H1) $(F2) $(H2) | tail -n 2
