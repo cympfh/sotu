@@ -1,3 +1,47 @@
+`npm + svm` 素晴らしいです．
+多値の対応も大変に簡単です．
+
+# test-cross.sh
+
+`svm-features.exe` で `libsvm` でも `svm^{light}` でも共通のあの
+訓練データ形式を書き出す．
+`or-test.js` はこれを読み込んで、`require('svm')` で6つの感情用に6つのSVM学習を行う．
+`OR-method` で6つ使って感情推定を行う．
+
+実行には、`./test/cross` を用いて
+
+```
+$ ./test/cross
+
+08
+null: 0.6666666666666666 1 0.8
+yor: 1 0.25 0.4
+ai: NaN 0 NaN
+odo: NaN 0 NaN
+ika: NaN NaN NaN
+haj: NaN NaN NaN
+emem
+null: 0.6 0.23076923076923078 0.3333333333333333
+yor: 0.6666666666666666 1 0.8
+ai: NaN 0 NaN
+odo: NaN 0 NaN
+ika: NaN NaN NaN
+haj: NaN NaN NaN
+ira200
+null: 0.5306122448979592 0.7878787878787878 0.6341463414634146
+yor: 0 0 0
+ai: 0 0 0
+odo: NaN NaN NaN
+ika: NaN 0 NaN
+haj: 0 NaN NaN
+```
+
+パラメータの調整はしてない
+
+---
+
+以下古い情報注意
+
 `svm^{light}` 使ってみます。
 
 # train
@@ -15,5 +59,3 @@ inputs: hand.txt features
 さもなくば、素性を出力する。
 svm^{light} の訓練データの一行に相当する。
 また、大切な素性の選択は、このファイルを書き換えることになる。
-
-
