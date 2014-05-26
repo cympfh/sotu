@@ -3,13 +3,12 @@
 PRINTF=./svm/svm-features.exe
 CROSS=./svm/or-test.js
 
-FE=$1
-HD=$2
+DIR=$1
 
-C=$3
-S=$4
+C=$2
+S=$3
 
-$PRINTF $FE $HD > /tmp/it.train
+$PRINTF $DIR > /tmp/it.train
 # svm-scale /tmp/it.train > /tmp/it.scaled
 # mv /tmp/it.scaled /tmp/it.train
 

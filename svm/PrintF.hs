@@ -7,26 +7,28 @@ import qualified Conj as C
 import Data.Array
 import Control.Monad
 
-printF :: ([It], [It]) -> IO ()
+printF :: ([It], [It], [It]) -> IO ()
 
 -- f :: [It] is features
 -- h :: [It] is hand
-printF (f, h)
+printF (f, h, u)
   | hasUndefined f = return ()
   | hasUndefined h = return ()
-  | otherwise = printF' (f, h)
+  | otherwise = printF' (f, h, u)
     where
       hasUndefined = any (\it -> ofIt it == "undefined")
 
-printF' (f, h) = do
+printF' (f, h, u) = do
   let n = length h
   let ar = listArray (0, n-1) f
+      br = listArray (0, n-1) u
   forM_ (zip [0 .. n-1] h) $ \(i, it) ->
           case it of
             Text t  -> do
               putStr t
               putStr " "
               printFeatureSet ar i
+              putStrLn $ "# " ++ ofIt (br!i)
             otherwise -> return ()
 
 printFeatureSet :: (Array Int It) -> Int -> IO ()
@@ -35,11 +37,14 @@ printFeatureSet ar i =
     concat $
       [ cur_t
 
+      -- skip
       , before_1_t, before_2_t, before_3_t
       , after_1_t, after_2_t, after_3_t
 
+      -- no skip
       , prev_i, next_i
 
+      -- skip
       , before_1_c
       , after_1_c
       ]

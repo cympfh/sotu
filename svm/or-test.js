@@ -10,7 +10,7 @@ var fs = require('fs')
 console.warn(options);
 
 fs.readFile(trainFile, 'utf8', function(err, datum) {
-  main( datum.split('\n').slice(0, -1) );
+  main( datum.split('\n').slice(0, -1).filter(function(l){return l[0] !== '#' }) );
 });
 
 function main(ls) {

@@ -8,9 +8,11 @@ import PrintF
 main :: IO ()
 main = do
   args <- getArgs
-  fs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 0)
-  hs <- splitByEOT <$> parse <$> lines <$> readFile (args !! 1)
-  mapM_ printF $ zip fs hs
+  let dir = args !! 0
+  fs <- splitByEOT <$> parse <$> lines <$> readFile (dir ++ "/f")
+  hs <- splitByEOT <$> parse <$> lines <$> readFile (dir ++ "/h")
+  us <- splitByEOT <$> parse <$> lines <$> readFile (dir ++ "/u")
+  mapM_ printF $ zip3 fs hs us
 
     where
       parse xs = p' xs []

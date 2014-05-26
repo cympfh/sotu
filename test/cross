@@ -10,5 +10,5 @@ s=0.8
 echo "# C=${c}, sigma=${s}"
 for d in $DIRS; do
   echo '##' $d
-  ./svm/test-cross.sh $PREF/$d/f $PREF/$d/h $c $s
+  ./svm/test-cross.sh $PREF/$d $c $s
 done
