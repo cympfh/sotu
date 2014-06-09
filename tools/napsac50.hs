@@ -7,25 +7,30 @@ data It = Text String | Icon String | Conj String | EOT deriving (Show, Ord, Eq)
 
 main = do
   args <- getArgs
-  let pref = head args
-      out = args !! 1
+  let pref = args !! 0
+      out  = args !! 1
   fs <- splitByEOT . parse . lines <$> readFile (pref ++ "/f")
   hd <- splitByEOT . parse . lines <$> readFile (pref ++ "/h")
+  ut <- splitByEOT . parse . lines <$> readFile (pref ++ "/u")
 
-  let (ffs, fhd, _) = foldl f ([], [], (0,0,0,0,0,0)) (zip fs hd)
+  let (ffs, fhd, fut, _) = foldl f ([], [], [], (0,0,0,0,0,0)) (zip3 fs hd ut)
 
   writeTweets ffs $ out ++ "/f"
   writeTweets fhd $ out ++ "/h"
+  writeTweets fut $ out ++ "/u"
 
     where
-      f (acf, ach, es@(e0,e1,e2,e3,e4,e5)) (twf, twh)
-        | hasUndef  = (acf, ach, es)
-        | grow      = (twf : acf, twh : ach, (e0+d0, e1+d1, e2+d2, e3+d3, e4+d4, e5+d5))
-        | otherwise = (acf, ach, es)
+      f (acf, ach, acu, es@(e0,e1,e2,e3,e4,e5)) (twf, twh, twu)
+        | hasUndef  = (acf, ach, acu, es)
+        | grow      = (acf', ach', acu', (e0+d0, e1+d1, e2+d2, e3+d3, e4+d4, e5+d5))
+        | otherwise = (acf, ach, acu, es)
           where (d0, d1, d2, d3, d4, d5) = count twh
                 -- grow = (e0 < 50 && d0 > 0) || (e1 < 50 && d1 > 0) || (e2 < 50 && d2 > 0) || (e3 < 50 && d3 > 0) || (e4 < 50 && d4 > 0) || (e5 < 50 && d5 > 0)
                 grow = (e2 < 50 && d2 > 0) || (e3 < 50 && d3 > 0) || (e4 < 50 && d4 > 0) || (e5 < 50 && d5 > 0)
                 hasUndef = any (== "undefined") $ map fromText $ filter textp twh
+                acf' = twf : acf
+                ach' = twh : ach
+                acu' = twu : acu
 
 
       count ls = c' $ map fromText $ filter textp ls

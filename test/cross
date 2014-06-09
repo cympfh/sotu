@@ -1,8 +1,7 @@
 #!/bin/bash
 
 PREF=$HOME/Dropbox/tw
-DIRS='08 emem ira200 cat cat_balanced'
-DIRS='ira200'
+DIRS='cat cat_balanced3'
 
 c=0.8
 s=0.8

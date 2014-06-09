@@ -21,18 +21,18 @@ printF (f, h, u)
 printF' (f, h, u) = do
   let n = length h
   let ar = listArray (0, n-1) f
-      br = listArray (0, n-1) u
+      ur = listArray (0, n-1) u
   forM_ (zip [0 .. n-1] h) $ \(i, it) ->
           case it of
             Text t  -> do
               putStr t
               putStr " "
-              printFeatureSet ar i
-              putStrLn $ "# " ++ ofIt (br!i)
+              printFeatureSet ar ur i
+              putStrLn $ "# " ++ ofIt (ur!i)
             otherwise -> return ()
 
-printFeatureSet :: (Array Int It) -> Int -> IO ()
-printFeatureSet ar i =
+printFeatureSet :: (Array Int It) -> (Array Int It) -> Int -> IO ()
+printFeatureSet ar ur i =
   putStrLn $ format $
     concat $
       [ cur_t
@@ -47,12 +47,19 @@ printFeatureSet ar i =
       -- skip
       , before_1_c
       , after_1_c
+
+      , sp , bikkuri, bar
       ]
     where
       --
       -- IMPORTANT
       --
       cur_t = getBinary text ar i
+
+      raw = ofIt (ur ! i)
+      sp = if length (filter (`elem` " 　") raw) > 0 then [True] else [False]
+      bikkuri = if length (filter (`elem` "!！") raw) > 0 then [True] else [False]
+      bar = if length (filter (`elem` "ー〜−") raw) > 0 then [True] else [False]
 
       before_1_t = getBinary text ar $ mae text ar i 1
       before_2_t = getBinary text ar $ mae text ar i 2
