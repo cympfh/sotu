@@ -1,6 +1,6 @@
 all: svm-features.exe
 
-svm-features.exe: svm-features.hs It.hs PrintF.hs Em.hs Conj.hs
+svm-features.exe: svm-features.hs It.hs PrintF.hs Em.hs Conj.hs Hyoso.hs
 	ghc -O3 $^ -o $@
 
 clean:

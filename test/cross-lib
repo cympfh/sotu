@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PREF=$HOME/Dropbox/tw
+DIRS='cat cat_balanced3'
+
+c=0.8
+g=0.8
+
+echo "# C=${c}, gamma=${g}"
+for d in $DIRS; do
+  echo '##' $d
+  ./svm/test-cross-lib.sh $PREF/$d $c $g
+done

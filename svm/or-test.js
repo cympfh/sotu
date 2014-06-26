@@ -5,6 +5,7 @@ var fs = require('fs')
   , svmC = +process.argv[4] || 0.99
   , svmRbfsigma = +process.argv[5] || 0.6
   , options = { kernel : 'rbf', C: svmC, rbfsigma: svmRbfsigma }
+  , options = { kernel : 'linear', C: svmC}
   ;
 
 console.warn(options);
