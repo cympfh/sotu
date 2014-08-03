@@ -99,5 +99,6 @@ function add(ls1, ls2) {
 function norm(ls) {
   var total = 0;
   for (var i=0; i<ls.length; ++i) total += ls[i];
+  if (total === 0) return ls;
   return ls.map(function(x){return x/total});
 }
