@@ -1,3 +1,5 @@
 #!/bin/bash
 
-node decode.js ~/Dropbox/tw/iraira/head200.units <<< "aiiyAmniImmmNinamnNiimmnNyYNtyInNYaYamNIaAmnNaAommiNyYnNaaIaYnoamtmmmmnzvuxmYNinaaAommnAmNAmImmmmmymmImnyniiNoOyAmNYaxnNAzvuxNImINinNaANaaaAmNINiImmmmiaaAvutaaauxNzwuxmnYmmAnoONYOmmnIxmmmyniiyvuUaNIanNzvxNaimnOmnYaamntYwUInNzvaAmmNIyYmmmNiNImmnNiAityYiiiimnimmNiiiimmaainiiiOyYaAmnNImmNaamtymmmtyNityaYnNYmmnNItyYaamnNyNInyNaIaaaaavuOaAmInzwuxnYnaynYmANYINAmNImyvuxmyYNy"
+UNITFILE=$1
+xsel -bo > /tmp/the-code
+node decode.js $UNITFILE < /tmp/the-code
