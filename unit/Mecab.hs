@@ -8,7 +8,7 @@ import Data.List
 
 mecab :: String -> IO ()
 mecab str = do
-  ls <- lines <$> readProcess "mecab" [] str
+  ls <- lines <$> readProcess "mecab" [] (str ++ "\n")
   flip forM_ printTag $
     filter hasSense $
     merge $
