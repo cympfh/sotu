@@ -30,12 +30,30 @@ var show = {
   'H' : "haj",
 };
 
+var idx = {
+  'U' : 0,
+  'N' : 1,
+  'Y' : 2,
+  'A' : 3,
+  'O' : 4,
+  'I' : 5,
+  'H' : 6,
+};
+
+
+var average = [];
+for (var i=0; i<7; ++i) average[i] = 0;
+var emline = [];
+for (var i=0; i<7; ++i) emline[i] = 0;
+
 var cx = 0;
 var flg = false;
 for (var i=0; i < ls.length; ++i) {
   var l = ls[i];
   if (l === '__EOT__') {
     console.log(l);
+    average = add(average, norm(emline))
+    for (var k=0; k<7; ++k) emline[k] = 0;
   } else if (l === '<icon>') {
     console.log(l);
     flg = true;
@@ -62,10 +80,25 @@ for (var i=0; i < ls.length; ++i) {
     console.log(l);
   } else if (flg) {
     console.log(show[code[cx]]);
+    emline[idx[code[cx]]]++;
     flg = false;
     ++cx;
   } else {
     console.log(l);
   }
 }
-console.warn(cx, code.length);
+
+console.warn(norm(average));
+
+function add(ls1, ls2) {
+  var ret = [];
+  for (var i=0; i<ls1.length; ++i) ret[i] = ls1[i] + ls2[i];
+  return ret;
+}
+
+function norm(ls) {
+  var total = 0;
+  for (var i=0; i<ls.length; ++i) total += ls[i];
+  if (total === 0) return ls;
+  return ls.map(function(x){return x/total});
+}
