@@ -17,5 +17,4 @@ features:
 light:
 	./svm/test-light.sh "null" $(F1) $(H1) $(F2) $(H2) | tail -n 2
 	./svm/test-light.sh "yor" $(F1) $(H1) $(F2) $(H2) | tail -n 2
-	./svm/test-light.sh "ika" $(F1) $(H1) $(F2) $(H2) | tail -n 2
 
