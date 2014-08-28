@@ -1,0 +1,7 @@
+./svm/test-cross-lib.sh /Users/cympfh/Dropbox/tw/random/
+| null | 0.7233009708737864 | 1 | 0.8394366197183099|
+| yor | NaN | 0 | NaN|
+| ai | NaN | 0 | NaN|
+| odo | NaN | 0 | NaN|
+| ika | NaN | 0 | NaN|
+| haj | NaN | NaN | NaN|

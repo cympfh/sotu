@@ -1,0 +1,7 @@
+./svm/test-cross-lib.sh ~/Dropbox/tw/emem/
+| null | 1 | 0.2647058823529412 | 0.4186046511627907|
+| yor | 0.6290322580645161 | 1 | 0.7722772277227724|
+| ai | NaN | 0 | NaN|
+| odo | NaN | 0 | NaN|
+| ika | NaN | 0 | NaN|
+| haj | NaN | 0 | NaN|

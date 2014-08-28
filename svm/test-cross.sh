@@ -8,6 +8,8 @@ DIR=$1
 C=$2
 S=$3
 
+echo "./svm/test-cross.sh ${DIR} ${C} ${S}"
+
 $PRINTF $DIR > /tmp/it.train
 # svm-scale /tmp/it.train > /tmp/it.scaled
 # mv /tmp/it.scaled /tmp/it.train
