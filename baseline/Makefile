@@ -1,0 +1,2 @@
+do:
+	coffee index.coffee
