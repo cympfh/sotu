@@ -22,7 +22,7 @@ sed \
   /tmp/it.raw > /tmp/it.labeled
 svm-scale /tmp/it.labeled > /tmp/it.scaled
 
-cat /tmp/it.scaled | sort-R > /tmp/it.shuffled
+cat /tmp/it.scaled  > /tmp/it.shuffled
 lines=`wc -l /tmp/it.shuffled | awk '{print $1}'`
 head -n $(( $lines * 2 / 3 )) /tmp/it.shuffled > /tmp/it.train
 tail -n $(( $lines * 1 / 3 )) /tmp/it.shuffled > /tmp/it.test

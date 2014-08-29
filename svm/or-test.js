@@ -51,7 +51,7 @@ function main(ls) {
   }
 
   var K = 3;
-  for (var k=0; k < K; ++k) {
+  for (var k=0; k < 1; ++k) {
     console.warn(k);
     var k1 = k * len / K | 0
       , k2 = (k+1) * len / K | 0;
@@ -94,6 +94,7 @@ function main(ls) {
         if (answer === e && correct === e) ++tp[e];
         if (answer === e && correct !== e) ++fp[e];
         if (answer !== e && correct === e) ++fn[e];
+        console.log(correct, answer);
       }
     }
   }

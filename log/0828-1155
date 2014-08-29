@@ -1,0 +1,7 @@
+./svm/test-cross-lib.sh /Users/cympfh/Dropbox/tw/cat_balanced3
+| null | 0.37254901960784315 | 1 | 0.5428571428571428|
+| yor | NaN | 0 | NaN|
+| ai | 1 | 0.2 | 0.3333333333333333|
+| odo | NaN | 0 | NaN|
+| ika | NaN | 0 | NaN|
+| haj | NaN | NaN | NaN|
