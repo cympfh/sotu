@@ -25,29 +25,15 @@ fs = (read f).map filter_text
 I = hs.length
 process.assert fs.length is I
 
-BS = {}
-BS.independent =
-  tp: 0
-  fp: 0
-  tn: 0
-BS.total =
-  tp: 0
-  fp: 0
-  tn: 0
-BS.icon8 =
-  tp: 0
-  fp: 0
-  tn: 0
-
 stat = (obj, label) ->
   futa = (x) -> Math.round(x * 1000) / 1000
   p = obj.tp / (obj.tp + obj.fp)
   r = obj.tp / (obj.tp + obj.tn)
   f = 2 / ((1/p) + (1/r))
-  console.log "| #{label} | #{futa p} | #{futa r} | #{futa f} |"
-
-target = 'yor'
-target = 'null'
+  label_sp = label
+  while label_sp.length < 11
+    label_sp = label_sp + ' '
+  console.log "| #{label_sp} | #{futa p} | #{futa r} | #{futa f} |"
 
 relax = (s) ->
   if 0 <= s.indexOf target then target else ''
@@ -62,37 +48,53 @@ find_icon = (tw, n) ->
     return tw[i].icon if tw[i]?.icon?
   tw[n].text
 
-for i in [0 ... I]
-  htw = hs[i]
-  ftw = fs[i]
-  N = htw.length
+for target in ['null', 'yor', 'ai', 'odo', 'ika', 'haj']
 
-  if ftw.length isnt N
-    console.log i
-    console.log '%j', htw
-    console.log '%j', ftw
-  process.assert (ftw.length is N)
+  BS = {}
+  BS.independent =
+    tp: 0
+    fp: 0
+    tn: 0
+  BS.total =
+    tp: 0
+    fp: 0
+    tn: 0
+  BS.icon8 =
+    tp: 0
+    fp: 0
+    tn: 0
 
-  total = relax total_of ftw
+  for i in [0 ... I]
+    htw = hs[i]
+    ftw = fs[i]
+    N = htw.length
 
-  for n in [0 ... N]
-    continue if not (htw[n].text?)
-    ht = htw[n].text
-    ft = relax ftw[n].text
-    ++BS.independent.tp if ht is target and ft is target
-    ++BS.independent.tn if ht is target and ft isnt target
-    ++BS.independent.fp if ht isnt target and ft is target
+    if ftw.length isnt N
+      console.log i
+      console.log '%j', htw
+      console.log '%j', ftw
+    process.assert (ftw.length is N)
 
-    ++BS.total.tp if ht is target and total is target
-    ++BS.total.tn if ht is target and total isnt target
-    ++BS.total.fp if ht isnt target and total is target
+    total = relax total_of ftw
 
-    ft_over = find_icon ftw, n
-    ++BS.icon8.tp if ht is target and ft_over is target
-    ++BS.icon8.tn if ht is target and ft_over isnt target
-    ++BS.icon8.fp if ht isnt target and ft_over is target
+    for n in [0 ... N]
+      continue if not (htw[n].text?)
+      ht = htw[n].text
+      ft = relax ftw[n].text
+      ++BS.independent.tp if ht is target and ft is target
+      ++BS.independent.tn if ht is target and ft isnt target
+      ++BS.independent.fp if ht isnt target and ft is target
 
+      ++BS.total.tp if ht is target and total is target
+      ++BS.total.tn if ht is target and total isnt target
+      ++BS.total.fp if ht isnt target and total is target
 
-stat BS.independent, "Independent"
-stat BS.total, "Total"
-stat BS.icon8, "Icon-8"
+      ft_over = find_icon ftw, n
+      ++BS.icon8.tp if ht is target and ft_over is target
+      ++BS.icon8.tn if ht is target and ft_over isnt target
+      ++BS.icon8.fp if ht isnt target and ft_over is target
+
+  console.log target
+  stat BS.independent, "Independent"
+  stat BS.total, "Total"
+  stat BS.icon8, "Icon-8"
